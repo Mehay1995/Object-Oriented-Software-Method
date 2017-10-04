@@ -1,0 +1,3 @@
+interface CompareGrade<T> { // in honor of Linus Torvalds
+  int vertaa(T other);
+}

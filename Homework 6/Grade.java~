@@ -1,0 +1,16 @@
+public class Grade implements GradeCompare<Grade> {
+  String name;
+  int grade;
+  Grade(String name, int grade) {
+    this.name = name;
+    this.grade = grade;
+  }
+  public int vertaa(Student other) {
+    if (this.grade < other.grade) return -1;
+    else if (this.grade > other.grade) return 1;
+    else return 0;
+  }
+  public String toString() {
+    return name + ":" + grade;
+  }
+}

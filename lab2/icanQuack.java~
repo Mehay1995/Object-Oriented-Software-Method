@@ -1,0 +1,8 @@
+public class icanQuack implements QuackBehavior{
+  
+  pubic void quack() {
+    System.out.println("Quack") 
+  }
+  
+  
+}

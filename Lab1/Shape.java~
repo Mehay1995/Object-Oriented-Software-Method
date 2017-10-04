@@ -1,0 +1,53 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Shape {
+    int x;
+    int y;
+    int r = (int)(30.0 + Math.random() * 60.0);
+    Color color;
+
+    public Shape(int n, int n2) {
+        this.x = n;
+        this.y = n2;
+        this.color = new Color((float)(0.5 + Math.random() / 2.0), (float)(0.5 + Math.random() / 2.0), (float)(0.5 + Math.random() / 2.0));
+    }
+
+    public void fall() {
+        this.y += 5;
+    }
+
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
+    }
+
+    public void draw(Graphics graphics) {
+        graphics.setColor(this.color);
+        graphics.fillOval(this.x - this.r, this.y - this.r, 2 * this.r, 2 * this.r);
+        graphics.setColor(Color.BLACK);
+        graphics.drawOval(this.x - this.r, this.y - this.r, 2 * this.r, 2 * this.r);
+    }
+
+    public void left() {
+        this.x -= 5;
+    }
+
+    public void right() {
+        this.x += 5;
+    }
+
+    public boolean touches(Ground ground) {
+        for (Shape shape : ground) {
+            if (!shape.overlaps(this)) continue;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean overlaps(Shape shape) {
+        int n = this.x - shape.x;
+        int n2 = this.y - shape.y;
+        double d = Math.sqrt(n * n + n2 * n2);
+        return d <= (double)(this.r + shape.r);
+    }
+}

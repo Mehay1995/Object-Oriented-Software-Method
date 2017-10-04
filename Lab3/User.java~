@@ -1,0 +1,10 @@
+
+public class User implements Observer extends observerable{
+  String name;
+  public User(String name) {
+    this.name = name;
+  }
+  public void update(Observable a, Object b) {
+    System.out.println( this + " sees a " + b + " thrown into the " + a );
+  }
+}

@@ -1,0 +1,17 @@
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+interface World {
+    public void draw(Graphics var1);
+
+    public void teh();
+
+    public void meh(MouseEvent var1);
+
+    public void keh(KeyEvent var1);
+
+    public boolean hasEnded();
+
+    public void sayBye();
+}

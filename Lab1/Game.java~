@@ -1,0 +1,70 @@
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+public class Game
+implements World {
+    Shape current = new Shape(200, 0);
+    Ground ground = new Ground();
+    boolean theEnd = false;
+    String message = "";
+
+    @Override
+    public boolean hasEnded() {
+        return this.theEnd;
+    }
+
+    @Override
+    public void sayBye() {
+        this.message = "Game Over!";
+    }
+
+    @Override
+    public void teh() {
+        this.current.fall();
+        if (this.current.y >= 400 || this.current.touches(this.ground)) {
+            this.ground.add(this.current);
+            this.current = new Shape(200, 0);
+            if (this.current.touches(this.ground)) {
+                this.theEnd = true;
+                this.current = null;
+            }
+        }
+    }
+
+    @Override
+    public void meh(MouseEvent mouseEvent) {
+    }
+
+    @Override
+    public void keh(KeyEvent keyEvent) {
+        if (this.current != null) {
+            int n = keyEvent.getKeyCode();
+            if (n == 37) {
+                this.current.left();
+            } else {
+                this.current.right();
+            }
+        }
+    }
+
+    @Override
+    public void draw(Graphics graphics) {
+        if (this.ground != null) {
+            this.ground.draw(graphics);
+        }
+        if (this.current != null) {
+            this.current.draw(graphics);
+        }
+        if (this.hasEnded()) {
+            graphics.setFont(new Font("Verdana", 0, 50));
+            graphics.drawString(this.message, 30, 200);
+        }
+    }
+
+    public static void main(String[] arrstring) {
+        BigBang bigBang = new BigBang(new Game());
+        bigBang.start(50, 430);
+    }
+}
